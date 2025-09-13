@@ -19,4 +19,5 @@ class Call(Base):
                             "User was inquiring about houses between $200k-600k in X area"
                             "User wanted a quote on their 3 bed 3 bath house"
     '''
+    summary = Column(Text) # more official summary
     transcript = Column(Text) # one-block transcript of the entire call
