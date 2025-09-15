@@ -35,9 +35,9 @@ def sync_calls():
 
     db.commit()
     db.close()
-    print("Synced calls with reason, result, and summary!")
+    print("Synced calls with reason, result, and summary")
 
 if __name__ == "__main__":
     sync_calls()
-    print("Synced calls!")
+    print("Synced call")
 

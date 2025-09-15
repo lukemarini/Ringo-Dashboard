@@ -2,9 +2,12 @@
 
 from openai import OpenAI
 import json
+from dotenv import load_dotenv
+import os
 
-# set API key in environment variables once created
-client = OpenAI(api_key="hardcode-or-use-env-var")
+load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 with open("query_params.json", "r") as f:
     QUERY_CONFIGS = json.load(f)
