@@ -1,18 +1,64 @@
 {
     "reason_result": {
-      "model": "gpt-4o-mini",
       "number": 1,
-      "temperature": 0.3,
+      "model": "gpt-4o-2024-08-06",
+      "temperature": 0.0,
       "top_p": 1.0,
-      "response_format": "text",
-      "system": "You are an assistant that extracts the REASON and RESULT of a phone call from a transcript. Return them clearly."
+
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "name": "reason_result_response",
+          "strict": true,
+          "schema": {
+            "type": "object",
+            "required": ["reason", "result"],
+            "properties": {
+              "reason": {
+                "type": "string",
+                "description": "A concise explanation of the main purpose or motivation of the caller's request. Avoid vague phrasing and only use language that a 6th grader would understand. Good example: 'The caller wanted to schedule a home showing for a property in *neighborhood* at *address*.' Bad example: 'The caller wanted a showing.' Good example: 'The caller was interested in properties in *neighborhood* with *budget*.' Bad example: 'The caller was interested in a house.'"
+              },
+              "result": {
+                "type": "string",
+                "description":  "A concise summary of the outcome or resolution of the call. Avoid vague phrasing and only use language that a 6th grader would understand. Avoid repeating the transcript verbatim; clearly state the achieved result or action taken. Good example: 'The agent scheduled a home showing for *date* at *time* at *address*.' Bad example: 'showing scheduled'. Good example: 'The caller was texted with information about 4 properties that met their *budget* in *neighborhood*. Bad example: 'Caller was given property information.'"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+
+      "system": "You are an assistant that analyzes real estate phone call transcripts. For each transcript, extract two key pieces of structured information:\n1. REASON: Why the caller contacted the agent (motivation, request, or inquiry).\n2. RESULT: What was accomplished or decided during the call (e.g., appointment booked, information provided).\n\nAlways return valid JSON strictly following the schema provided. Do not include extra text or explanations. Avoid using vague phrasing and only use language a 6th grader would understand. "
+  },
+
+
+  "summary": {
+    "number": 1,
+    "model": "gpt-4o-2024-08-06",
+    "temperature": 0.2,
+    "top_p": 1.0,
+
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "summary_response",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "required": ["summary"],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "description": "A clear, concise, 2 to 3 sentence summary of the phone call. Avoid vague or generic statements. Use language that a 6th grader would understand. Avoid repeating the transcript word-for-word. Good example: 'The caller asked about homes in Madison priced between $200k and $400k, with 3 or 4 bedrooms and 3 or 4 bathrooms. The agent sent them the following three listings by text: *address 1*, *address 2*, *address 3*.' Bad example: 'They talked about houses.' Good example: 'The caller wanted to see a house at *address*, and the agent scheduled a showing for Saturday at 3 PM.' Bad example: 'Showing scheduled.'"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
     },
-    "summary": {
-      "model": "gpt-4o-mini",
-      "number": 1,
-      "temperature": 0.5,
-      "top_p": 1.0,
-      "response_format": "text",
-      "system": "You are an assistant that summarizes phone call transcripts in a professional tone."
-    }
+
+    "system": "You are an assistant that summarizes real estate phone call transcripts. For each transcript, write a single clear, concise summary of the conversation in 2 to 3 sentences. The summary should:\n- Explain the caller's request or question.\n- Explain what action or outcome happened as a result.\n- Avoid vague or generic phrasing.\n- Be written in language a 6th grader would understand.\n- Never repeat the transcript word-for-word.\n\nAlways return valid JSON strictly following the schema provided."
   }
+}
+
+ 
