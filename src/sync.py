@@ -22,6 +22,7 @@ def sync_calls():
         db_call = Call(
             phone_number=call["phone_number"],
             direction=call["direction"],
+            date = call["date"],
             start_time=datetime.fromisoformat(call["start_time"]),
             end_time=datetime.fromisoformat(call["end_time"]),
             duration_seconds=call["duration_seconds"],

@@ -1,6 +1,6 @@
 # This file serves as the structure for each call to be stored in postgres
 
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Date
 from sqlalchemy.orm import relationship
 from .db import Base
 
@@ -35,6 +35,7 @@ class Call(Base):
 
     phone_number = Column(String, index=True) # phone number of the caller/recipient
     direction = Column(String) # indicates incoming/outgoing call 
+    date = Column(Date) # date of the call
     start_time = Column(DateTime) # start time of the call in EST
     end_time = Column(DateTime) # end time of the call in EST
     duration_seconds = Column(Integer) # number of seconds the call lasted
